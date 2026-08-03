@@ -1,0 +1,18 @@
+@import "tailwindcss"; /*trae su propio reset */
+@import "./theme.css";
+
+/* Estilos globales aqui:  */
+@layer base{
+    body{
+        font-family: 'Courier New', Courier, monospace;
+        background-color: var(--orange);
+    }
+}
+
+/* UI (Button , Div, Img) css
+
+    components (ProductList, oRDERlIST, ProductCard) no css
+    
+    layouts (Navbar, productList,Footer) todo lo que tiene un layout
+    
+    pages (ProductPage) => VISTAS */
