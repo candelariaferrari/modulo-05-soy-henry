@@ -1,79 +1,29 @@
-<<<<<<< HEAD
-# React + TypeScript + Vite
+## decisiciones de ia 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+prompt: Estoy haciendo un e-commerce con react y ts. Necesito una arquitectura de carpetas por capas que separe: tipos / servicios de datos / estado global (contexto) / ui(componentes)  / paginas. Yo ya tengo assets, components (layouts y ui), contexts, hook, pages, services, style, types. Crees que me falta alguna más? sugerime una mejora de estructura y explicame el porque y que va en cada una.
 
-Currently, two official plugins are available:
+respuesta: 
+types/ (contratos del dominio), 
+services/ (único lugar que consume APIs/SDKs externos), 
+contexts/ (estado global por dominio, usa types y services, nunca hace fetch directo ni define tipos), components/ (UI reutilizable, recibe datos por props, sin lógica de negocio compleja)
+pages/ (pantallas completas que componen componentes + estado global). 
+Además se menciona hooks/ como la interfaz de consumo del estado de los contexts — el lugar donde viven los custom hooks con guard (useCart, useAuth, etc.) que desacoplan a los componentes de la lógica interna de cada context.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-=======
-# modulo-05-soy-henry
->>>>>>> a7c645bf6cb2974951397d231b09b0dc876c45e1
+src/
+├── assets/
+├── components/
+│   ├── layout/
+│   └── ui/
+├── config/
+├── constants/
+├── contexts/
+├── hooks/
+├── utils/
+├── pages/
+├── routes/
+├── schemas/
+├── services/
+├── store/          (opcional, si crece más allá de Context)
+├── styles/
+├── types/
+└── App.tsx / main.tsx
